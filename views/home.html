@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#btnget").on('click', function() {
+                $.ajax({
+                    url: 'http://localhost:6070/api/employees',
+                    type: 'GET'
+                }).done(function(resp) {
+                    alert(JSON.stringify(resp));
+                }).fail(function(err) {
+                    alert('Errr ' + err.status);
+                });
+            });
+
+            $("#btnpost").on('click', function() {
+                $.ajax({
+                    url: 'http://localhost:6070/api/employees',
+                    type: 'POST',
+                    contenttype: 'application/json',
+                    datatype: 'json',
+                    data: {
+                        "EmpNo": 103,
+                        "EmpName": "C",
+                        "Salary": 7800,
+                        "DeptName": "D1",
+                        "Designation": "Ds3"
+                    }
+                }).done(function(resp) {
+                    alert(JSON.stringify(resp));
+                }).fail(function(err) {
+                    alert('Errr ' + err.status);
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>This is Home Page</h1>
+    <hr>
+    <input type="button" value="Get" id="btnget" class="btn btn-success">
+    <input type="button" value="Post" id="btnpost" class="btn btn-success">
+</body>
+
+</html>
